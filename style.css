@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    gap:1rem;
+}
+
+.card{
+    width: 50%;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: white;
+    font-weight: 900;
+    font-size: 2em;
+}
