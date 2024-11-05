@@ -1,16 +1,17 @@
-.container{
-    display: flex;
-    gap:1rem;
+.container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.card{
-    width: 50%;
-    background-color: blue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    color: white;
-    font-weight: 900;
-    font-size: 2em;
+.card {
+  flex-basis: 50px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: white;
+  font-weight: 900;
+  font-size: 2em;
 }
