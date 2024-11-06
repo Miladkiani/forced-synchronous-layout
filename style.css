@@ -1,4 +1,10 @@
+body{
+  padding: 1rem;
+}
+
+
 .container {
+  margin-block-start: 1rem;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -14,4 +20,20 @@
   color: white;
   font-weight: 900;
   font-size: 2em;
+}
+
+/* TODO: check class name */
+.adjustment-container{
+  background-color: aqua;
+  width: 200px;
+  height: 0.5rem;
+  cursor: n-resize;
+}
+
+/* TODO: check class name */
+.adjustment-controller{
+  width: 0.25rem;
+  background-color: black;
+  height: 100%;
+  display: block;
 }
