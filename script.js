@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isAdjusting = false;
 
   const createCards = () => {
-    Array.from({ length: 200 }).map((item, index) => {
+    Array.from({ length: 100 }).map((item, index) => {
       const newCardElement = document.createElement("article");
       newCardElement.textContent = "Lorem, ipsum dolor.";
       newCardElement.className = "card";
@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const updateFontSize = (e) => {
-    isAdjusting = false;
-
     cardElements.map((item) => {
       item.style.fontSize = getCurrentFontSize();
     });
@@ -57,7 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("mouseup", () => {
-    if (isAdjusting) updateFontSize();
+    if (isAdjusting) {
+      isAdjusting = false;
+      updateFontSize();
+    }
   });
 
   sliderContainerElm.addEventListener("mousedown", (e) => {
