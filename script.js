@@ -1,61 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const containerElm = document.querySelector(".container");
+  const layoutContainerElm = document.querySelector(".layout-container");
+  const sliderContainerElm = document.querySelector(".slider-container");
+  const sliderElm = document.querySelector(".slider-controller");
 
-  const adjustContainerElm = document.querySelector(".adjustment-container");
-  const adjustControllerElm = document.querySelector(".adjustment-controller");
+  const cardElements = [];
 
   let isAdjusting = false;
 
   const createCards = () => {
-    Array.from({ length: 100 }).map((item, index) => {
+    Array.from({ length: 200 }).map((item, index) => {
       const newCardElement = document.createElement("article");
-      newCardElement.textContent = index + 1;
+      newCardElement.textContent = "Lorem, ipsum dolor.";
       newCardElement.className = "card";
-      containerElm.append(newCardElement);
+      layoutContainerElm.append(newCardElement);
+      cardElements.push(newCardElement);
     });
   };
 
-  const updateCardsDimension = (e) => {
-    // TODO:
-  };
-
-  const updateControllerUI = (e) => {
-    let newWidth = e.clientX - adjustControllerElm.getBoundingClientRect().left;
-
-    if (newWidth < 0) newWidth = 0;
-    else if (newWidth > adjustContainerElm.offsetWidth)
-      newWidth = adjustContainerElm.offsetWidth;
-
-    adjustControllerElm.style.width = `${newWidth}px`;
+  const getCurrentFontSize = () => {
+    switch (true) {
+      case sliderElm.offsetWidth > 125:
+        return "2.5rem";
+      case sliderElm.offsetWidth > 100:
+        return "2.3rem";
+      case sliderElm.offsetWidth > 75:
+        return "1.8rem";
+      case sliderElm.offsetWidth > 50:
+        return "1.5rem";
+      case sliderElm.offsetWidth > 25:
+        return "1.2rem";
+      default:
+        return "1rem";
+    }
   };
 
   const updateFontSize = (e) => {
     isAdjusting = false;
+
+    cardElements.map((item) => {
+      item.style.fontSize = getCurrentFontSize();
+    });
   };
 
-  const debounce = (fn, time = 1000) => {
-    let timer = null;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn(...args);
-      }, time);
-    };
-  };
+  const updateSliderSize = (e) => {
+    let newWidth = e.clientX - sliderElm.getBoundingClientRect().left;
 
-  window.addEventListener("resize", debounce(updateCardsDimension, 2000));
+    if (newWidth < 0) newWidth = 0;
+    else if (newWidth > sliderContainerElm.offsetWidth)
+      newWidth = sliderContainerElm.offsetWidth;
+
+    sliderElm.style.width = `${newWidth}px`;
+  };
 
   window.addEventListener("mousemove", (e) => {
-    if (isAdjusting) updateControllerUI(e);
+    if (isAdjusting) updateSliderSize(e);
   });
 
   window.addEventListener("mouseup", () => {
     if (isAdjusting) updateFontSize();
   });
 
-  adjustContainerElm.addEventListener("mousedown", (e) => {
+  sliderContainerElm.addEventListener("mousedown", (e) => {
     isAdjusting = true;
-    updateControllerUI(e);
+    updateSliderSize(e);
   });
 
   createCards();
